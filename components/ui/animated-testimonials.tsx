@@ -3,15 +3,16 @@
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 type Testimonial = {
     quote: string;
     name: string;
     designation: string;
-    button: string;
+    button: React.ReactNode;
     src: string;
 };
+
 export const AnimatedTestimonials = ({
     testimonials,
     autoplay = false,
@@ -43,9 +44,50 @@ export const AnimatedTestimonials = ({
     const randomRotateY = () => {
         return Math.floor(Math.random() * 21) - 10;
     };
+
+    const renderQuoteWithLinks = (quote: string) => {
+        return quote.split(" ").map((word, index) => {
+            const isLink = word.startsWith("http://") || word.startsWith("https://");
+            return (
+                <motion.span
+                    key={index}
+                    initial={{
+                        filter: "blur(10px)",
+                        opacity: 0,
+                        y: 5,
+                    }}
+                    animate={{
+                        filter: "blur(0px)",
+                        opacity: 1,
+                        y: 0,
+                    }}
+                    transition={{
+                        duration: 0.2,
+                        ease: "easeInOut",
+                        delay: 0.02 * index,
+                    }}
+                    className="inline-block"
+                >
+                    {isLink ? (
+                        <a
+                            href={word}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-500 underline hover:text-blue-700"
+                        >
+                            {word}
+                        </a>
+                    ) : (
+                        <>{word}&nbsp;</>
+                    )}
+                </motion.span>
+            );
+        });
+    };
+
     return (
         <div className="max-w-sm md:max-w-4xl mx-auto antialiased font-sans px-4 md:px-8 lg:px-12 py-20">
-            <div className="relative grid grid-cols-1 md:grid-cols-2  gap-20">
+            <div className="relative grid grid-cols-1 md:grid-cols-2 gap-20">
                 <div>
                     <div className="relative h-80 w-full">
                         <AnimatePresence>
@@ -63,9 +105,7 @@ export const AnimatedTestimonials = ({
                                         scale: isActive(index) ? 1 : 0.95,
                                         z: isActive(index) ? 0 : -100,
                                         rotate: isActive(index) ? 0 : randomRotateY(),
-                                        zIndex: isActive(index)
-                                            ? 999
-                                            : testimonials.length + 2 - index,
+                                        zIndex: isActive(index) ? 999 : testimonials.length + 2 - index,
                                         y: isActive(index) ? [0, -80, 0] : 0,
                                     }}
                                     exit={{
@@ -96,22 +136,10 @@ export const AnimatedTestimonials = ({
                 <div className="flex justify-between flex-col py-4">
                     <motion.div
                         key={active}
-                        initial={{
-                            y: 20,
-                            opacity: 0,
-                        }}
-                        animate={{
-                            y: 0,
-                            opacity: 1,
-                        }}
-                        exit={{
-                            y: -20,
-                            opacity: 0,
-                        }}
-                        transition={{
-                            duration: 0.2,
-                            ease: "easeInOut",
-                        }}
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        exit={{ y: -20, opacity: 0 }}
+                        transition={{ duration: 0.2, ease: "easeInOut" }}
                     >
                         <h3 className="text-2xl font-bold dark:text-white ">
                             {testimonials[active].name}
@@ -119,33 +147,11 @@ export const AnimatedTestimonials = ({
                         <p className="text-sm text-gray-500 dark:text-neutral-500">
                             {testimonials[active].designation}
                         </p>
-                        <button className="text-2xl text-blue-400">
+                        <button className="text-3xl text-blue-400">
                             {testimonials[active].button}
                         </button>
                         <motion.p className="text-lg text-gray-500 mt-8 dark:text-neutral-300">
-                            {testimonials[active].quote.split(" ").map((word, index) => (
-                                <motion.span
-                                    key={index}
-                                    initial={{
-                                        filter: "blur(10px)",
-                                        opacity: 0,
-                                        y: 5,
-                                    }}
-                                    animate={{
-                                        filter: "blur(0px)",
-                                        opacity: 1,
-                                        y: 0,
-                                    }}
-                                    transition={{
-                                        duration: 0.2,
-                                        ease: "easeInOut",
-                                        delay: 0.02 * index,
-                                    }}
-                                    className="inline-block"
-                                >
-                                    {word}&nbsp;
-                                </motion.span>
-                            ))}
+                            {renderQuoteWithLinks(testimonials[active].quote)}
                         </motion.p>
                     </motion.div>
                     <div className="flex gap-4 pt-12 md:pt-0">
