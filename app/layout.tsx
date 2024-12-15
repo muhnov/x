@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Modern Portofolio",
+  title: "Airdrop",
   description: "Portofolio and Airdrop",
 };
 
