@@ -12,14 +12,14 @@ export function TypewriterEffectSmoothDemo() {
             text: "Potential",
         },
         {
-            text: "View Airdop, Click Button",
+            text: "View Airdrop, Click Button",
             className: "text-violet-500",
         },
     ];
     return (
         <div className="flex flex-col items-center justify-center">
             <TypewriterEffectSmooth words={words} />
-            
+
         </div>
     );
 }
