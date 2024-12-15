@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Airdrop",
-  description: "Portofolio and Airdrop",
+  description: "Airdrop",
 };
 
 export default function RootLayout({
