@@ -4,8 +4,8 @@ import { Spotlight } from './ui/Spotlight';
 import { SparklesPreview } from './SparklesPreview';
 import MagicButton from './MagicButton';
 import { AnimatedTestimonialsDemo } from './Animated';
-import { Copy } from 'lucide-react';
-import { Footer } from './Footer';
+import Footer from './Footer';
+
 
 
 

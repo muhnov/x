@@ -1,12 +1,7 @@
-// @flow 
-import * as React from 'react';
+import React from 'react';
 import { socialIcons } from './data';
-import MagicButton from './MagicButton';
-import { div, footer } from 'framer-motion/client';
-type Props = {
 
-};
-export const Footer = (props: Props) => {
+const Footer = () => {
     return (
         <footer className='w-full  pt-48 pb-10' id='contact'>
             <div className='flex flex-col items-center ' >
@@ -27,3 +22,5 @@ export const Footer = (props: Props) => {
         </footer>
     );
 };
+
+export default Footer;
