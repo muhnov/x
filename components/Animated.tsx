@@ -1,4 +1,3 @@
-import { a, button } from "framer-motion/client";
 import { AnimatedTestimonials } from "./ui/animated-testimonials";
 
 export function AnimatedTestimonialsDemo() {
