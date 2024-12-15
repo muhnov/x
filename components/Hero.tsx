@@ -4,6 +4,8 @@ import { Spotlight } from './ui/Spotlight';
 import { SparklesPreview } from './SparklesPreview';
 import MagicButton from './MagicButton';
 import { AnimatedTestimonialsDemo } from './Animated';
+import { Copy } from 'lucide-react';
+import { Footer } from './Footer';
 
 
 
@@ -37,10 +39,13 @@ const Hero = () => {
                             />
                         </a>
                     </div>
+                    {/* content */}
                     <div id='garapan' className='pt-36 text-white items-center justify-center'>
                         <h1 className='text-4xl text-center'>App Telegram</h1>
                         <AnimatedTestimonialsDemo/>
                     </div>
+                    {/* footer */}
+                    <Footer/>
                 </div>
             </div>
         </section>
